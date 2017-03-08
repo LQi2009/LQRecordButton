@@ -33,6 +33,11 @@
 - (void)dealloc {
     
     NSLog(@"%@ dealloc", NSStringFromClass([self class]));
+    if (self.link) {
+        [self.link removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+        [self.link invalidate];
+        self.link = nil;
+    }
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
